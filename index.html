@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Yatzy Scorecard</title>
+  <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+  <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<div id="app">
+  <h1>Yatzy Scorecard</h1>
+  <div class="container">
+    <table cellpadding="0" cellspacing="0" border="0">
+      <thead>
+        <th>Spelare</th>
+        <td v-for="(player, id) in players" :key="`player-${id + 1}`">
+          <input type="text" v-model="player.name" :placeholder="`${labels.player.name} ${id + 1}`">
+        </td>
+        <td><button @click="addPlayer('')">Lägg till spelare</button></td>
+      </thead>
+      <tbody>
+        <tr v-for="(value, key) in labels.first">
+          <td>{{value}}</td>
+          <td v-for="(player, id) in players" :key="`player-${id + 1}-${key}`">
+            <input type="tel" v-model="player.scores[key]">
+          </td>
+        </tr>
+      </tbody>
+      <tbody>
+        <tr>
+          <td :colspan="players.length + 1">
+            <hr>
+          </td>
+        </tr>
+        <tr>
+          <td>Summa</td>
+          <td v-for="(player, id) in players" :key="`player-${id + 1}-total`">
+            {{playerSum(id)}}
+          </td>
+       </tr>
+       <tr>
+         <td>Bonus</td>
+         <td v-for="(player, id) in players" :key="`player-${id + 1}-total`">
+           {{playerBonus(id)}}
+         </td>
+       </tr>
+        <tr>
+         <td :colspan="players.length + 1">
+           <hr>
+         </td>
+       </tr>
+     </tbody>
+     <tbody>
+       <tr v-for="(value, key) in labels.second">
+         <td>{{value}}</td>
+         <td v-for="(player, id) in players" :key="`player-${id + 1}-${key}`">
+           <input type="tel" v-model="player.scores[key]">
+         </td>
+       </tr>
+     </tbody>
+     <tbody>
+       <tr>
+         <td :colspan="players.length + 1">
+           <hr>
+         </td>
+         </tr>
+       <tr>
+         <td>Totalt</td>
+         <td v-for="(player, id) in players" :key="`player-${id + 1}-total`">
+           {{playerTotal(id)}}
+          </td>
+       </tr>
+       <tr>
+         <td></td>
+         <td v-for="(player, id) in players" :key="`player-${id + 1}-remove`">
+           <button @click="removePlayer(id)">Ta bort spelare</button>
+         </td>
+         </tr>
+       </tbody>
+    </table>
+ </div>
+</div>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>

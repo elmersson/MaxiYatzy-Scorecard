@@ -1,0 +1,2 @@
+# MaxYatzy-Scorecard
+ 
